@@ -1,3 +1,5 @@
 .venv
 .idea
 config/config.ini
+__pycache__/
+*.py[cod]

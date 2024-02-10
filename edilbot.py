@@ -2,7 +2,7 @@ from typing import Any
 
 import discord
 from config.botconfig import Config
-from perm.perm import Permanence
+from perm.permanence import Permanence
 
 
 class EdilBot(discord.Bot):

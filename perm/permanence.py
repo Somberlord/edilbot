@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-from perm.perm_creation_modal import PermCreateModal
+from perm.creation_modal import PermCreateModal
 from config.i18n import I18nPermanenceStandard as I18n
 
 

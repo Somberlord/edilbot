@@ -1,6 +1,6 @@
 import discord
 from config.i18n import I18nPermanenceStandard as I18n
-from perm.permformatting import PermFormat
+from perm.format import PermFormat
 
 
 class PermCreateModal(discord.ui.Modal):
