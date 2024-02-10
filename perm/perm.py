@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+
 from perm.perm_creation_modal import PermCreateModal
 from config.i18n import I18nPermanenceStandard as I18n
 from config.botconfig import Config
@@ -7,9 +8,9 @@ from config.botconfig import Config
 
 class Permanence(commands.Cog):
 
-    def __init__(self, bot: discord.Bot, config: Config):
+    def __init__(self, bot):
         self.bot: discord.Bot = bot
-        self.config: Config = config
+        self.config: Config = bot.get_config()
 
     @commands.slash_command(description=I18n.PCM_SLASHCMD_DESC)
     async def perm(self, ctx):
