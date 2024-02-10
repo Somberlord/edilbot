@@ -1,9 +1,12 @@
-# TODO read config file
-AUTH_FILE = "config/AUTH_TOKEN"
+import configparser
+CONFIG_FILE = "config/config.ini"
 
 
 class Config:
     def __init__(self):
-        with open(AUTH_FILE) as f:
-            self.client_secret = f.read().strip()
-        self.perm_channel = 1203803021096783953
+        parser = configparser.ConfigParser()
+        parser.read(CONFIG_FILE)
+        # Global configuration
+        self.client_secret = parser['global']['DiscordAuthToken']
+        # Permanence configuration
+        self.permanence_config = parser['permanence']

@@ -15,3 +15,4 @@ class I18nPermanenceStandard:
     PCT_PERM_START: str = "Début"
     PCT_PERM_END: str = "Fin"
     PCT_EMBED_COLOR = discord.Colour.blurple()
+    PMR_THREAD_CREATED = "Thread créé"
