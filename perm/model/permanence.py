@@ -1,4 +1,4 @@
-class Event:
+class Permanence:
     def __init__(self, title="", datestr="", startstr="", endstr="", description=""):
         self.title: str = title
         self.datestr: str = datestr

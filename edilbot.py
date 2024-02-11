@@ -2,7 +2,8 @@ from typing import Any
 
 import discord
 from config.botconfig import Config
-from perm.permanence import Permanence
+from perm.permanencecog import PermanenceCog
+from perm.wordpress.wordpress_event_listener import WordpressEventListener
 
 
 class EdilBot(discord.Bot):
@@ -13,7 +14,10 @@ class EdilBot(discord.Bot):
 
     # Add Cogs, run
     def run(self, *args: Any, **kwargs: Any) -> None:
-        self.add_cog(Permanence(self, self.config.permanence_config))
+        cog = PermanenceCog(self, self.config.permanence_config)
+        wp_listener = WordpressEventListener(self)
+        cog.add_event_listener(wp_listener)
+        self.add_cog(cog)
         super().run(*args, **kwargs, token=self.config.client_secret)
 
     def get_config(self) -> Config:
