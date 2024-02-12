@@ -1,26 +1,51 @@
 import discord
-from config.i18n import I18nPermanenceStandard as I18n
 from perm.model.permanence import Permanence
 
 
 class PermFormat:
 
     @staticmethod
-    def get_pt_title(permdate, permtitle) -> str:
-        return f"[{permdate}] {permtitle}"
+    def pcm_slashcmd_desc() -> str:  # Permanence Command - Slash Command - Description
+        return "Création de permanence"
 
     @staticmethod
-    def get_pt_embed(perm: Permanence, user: discord.User) -> discord.Embed:
-        embed = discord.Embed(
-            title=PermFormat.get_pt_title(perm.datestr, perm.title),
-            description=f"{I18n.PCT_THREAD_DESC} <@{user.id}>",
-            color=I18n.PCT_EMBED_COLOR,
-        )
+    def pcm_modal_title() -> str:  # Permanence Modal - Title
+        return "Création de permanence"
 
-        embed.add_field(name=I18n.PCM_PERM_DATE, value=perm.startstr, inline=True)
-        embed.add_field(name=I18n.PCT_PERM_START, value=perm.startstr, inline=True)
-        embed.add_field(name=I18n.PCT_PERM_END, value=perm.endstr, inline=True)
-        embed.add_field(name=I18n.PCM_PERM_DESC, value=perm.description)
+    @staticmethod
+    def pcm_modal() -> dict:  # Permanence Modal - Data
+        return {
+            'title': PermFormat.pcm_modal_title(),
+            'date': "Date",
+            'start': "Heure de début",
+            'end': "Heure de fin",
+            'description': "Description",
+        }
+
+    @staticmethod
+    def pcm_thread(perm: Permanence, user: discord.User) -> dict:  # Permanence Modal - Created Thread
+        title = f"[{perm.datestr}] {perm.title}"
+        return {
+            'title': title,
+            'embed': PermFormat.pcm_thread_embed(perm, user, title)
+        }
+
+    @staticmethod
+    # Permanence Modal - Thread Embed
+    def pcm_thread_embed(perm: Permanence, user: discord.User, title) -> discord.Embed:
+        embed = discord.Embed(
+            title=title,
+            description=f"Permanence créée par <@{user.id}>",
+            color=discord.Colour.blurple(),
+        )
+        embed.add_field(name="Date", value=perm.startstr, inline=True)
+        embed.add_field(name="Début", value=perm.startstr, inline=True)
+        embed.add_field(name="Fin", value=perm.endstr, inline=True)
+        embed.add_field(name="Description", value=perm.description)
         embed.set_footer(text="React down there")
         embed.set_author(name=f"{user.name}")
         return embed
+
+    @staticmethod
+    def pcm_response(threadid: int) -> str:  # Permanence Modal - Command Response
+        return f"Thread créé : <#{threadid}>"

@@ -1,5 +1,4 @@
 import discord
-from config.i18n import I18nPermanenceStandard as I18n
 from perm.format import PermFormat
 from perm.model.permanence import Permanence
 
@@ -9,16 +8,17 @@ class PermCreateModal(discord.ui.Modal):
         super().__init__(*args, **kwargs)
 
         self.permcb = permcb
+        modal_format = PermFormat.pcm_modal()
 
-        self.add_item(discord.ui.InputText(label=I18n.PCM_PERM_TITLE))
-        self.add_item(discord.ui.InputText(label=I18n.PCM_PERM_DATE))
-        self.add_item(discord.ui.InputText(label=I18n.PCM_PERM_START_TIME))
-        self.add_item(discord.ui.InputText(label=I18n.PCM_PERM_END_TIME))
-        self.add_item(discord.ui.InputText(label=I18n.PCM_PERM_DESC, style=discord.InputTextStyle.long))
+        self.add_item(discord.ui.InputText(label=modal_format['title']))
+        self.add_item(discord.ui.InputText(label=modal_format['date']))
+        self.add_item(discord.ui.InputText(label=modal_format['start']))
+        self.add_item(discord.ui.InputText(label=modal_format['end']))
+        self.add_item(discord.ui.InputText(label=modal_format['description'],
+                                           style=discord.InputTextStyle.long))
 
     async def callback(self, interaction: discord.Interaction):
         perm = Permanence(title=self.children[0].value, datestr=self.children[1].value,
-                           startstr=self.children[2].value, endstr=self.children[3].value,
-                           description=self.children[4].value)
-        embed = PermFormat.get_pt_embed(perm=perm, user=interaction.user)
-        await self.permcb(interaction=interaction, embed=embed, perm=perm)
+                          startstr=self.children[2].value, endstr=self.children[3].value,
+                          description=self.children[4].value)
+        await self.permcb(interaction=interaction, perm=perm)
