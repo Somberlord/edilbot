@@ -10,4 +10,4 @@ class WordpressEventListener(EventListener):
         self.bot = bot
 
     async def create_permanence(self, perm: Permanence):
-        print("create permanence in wordpress")
+        self.bot.logger.info("create permanence in wordpress")
