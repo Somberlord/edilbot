@@ -38,7 +38,7 @@ class PermFormat:
             description=f"Permanence créée par <@{user.id}>",
             color=discord.Colour.blurple(),
         )
-        embed.add_field(name="Date", value=perm.startstr, inline=True)
+        embed.add_field(name="Date", value=perm.datestr, inline=True)
         embed.add_field(name="Début", value=perm.startstr, inline=True)
         embed.add_field(name="Fin", value=perm.endstr, inline=True)
         embed.add_field(name="Description", value=perm.description)
