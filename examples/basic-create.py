@@ -14,17 +14,17 @@ async def main():
     config.read("config.ini")
 
     auth = aiohttp.BasicAuth(
-        login=config.get("wordpress", "login", "john"),
-        password=config.get("wordpress", "password_app", "doe")
+        login=config.get("wordpress", "login"),
+        password=config.get("wordpress", "password_app")
     )
 
     data = {
         "title": "Permanence",
-        "start_date": "2024-02-18 09:00",
-        "end_date": "2024-02-18 10:00",
+        "start_date": "2024-02-18 12:00",
+        "end_date": "2024-02-18 15:00",
         "timezeone": "Europe/Paris",
-        "excerpt": "Découverte Voidfall EXC",
-        "description": "Découverte Voidfall DESC",
+        "excerpt": "Découverte Voidfall",
+        "description": "Découverte Voidfall",
         # "id": 1 l'auteur, par défaut le user de l'application
     }
     async with aiohttp.ClientSession(auth=auth) as session:
@@ -32,6 +32,7 @@ async def main():
         async with session.post(URL, data=data) as response:
             print("Status:", response.status)
             html = await response.text()
+            data = json.loads(html)
             print(json.dumps(data, indent=2))
             # id should be saved to be able to delete / edit event
 
