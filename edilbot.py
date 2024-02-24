@@ -13,6 +13,7 @@ class EdilBot(discord.Bot):
     def __init__(self, *args, **options):
         super().__init__(*args, **options)
         self.config = Config()
+        self.logger_name = 'edilbot'
         # Set up pycord logging
         discord_logger = logging.getLogger('discord')
         discord_logger.setLevel(self.config.discord_log_level)
@@ -22,7 +23,7 @@ class EdilBot(discord.Bot):
         discord_logger.addHandler(discord_handler)
 
         # Set up edilbot logger
-        edilbot_logger = logging.getLogger('edilbot')
+        edilbot_logger = logging.getLogger(self.logger_name)
         edilbot_logger.setLevel(self.config.edilbot_log_level)
         if self.config.edilbot_log_filename == self.config.discord_log_filename:
             edilbot_handler = discord_handler
