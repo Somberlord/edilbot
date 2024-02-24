@@ -13,6 +13,10 @@ class PermFormat:
         return "Création de permanence"
 
     @staticmethod
+    def pcm_get_input_error() -> str:  # Permanence Modal - Input Error Message
+        return "(Erreur de format)"
+
+    @staticmethod
     def pcm_modal() -> dict:  # Permanence Modal - Data
         return {
             'title': PermFormat.pcm_modal_title(),
@@ -21,6 +25,10 @@ class PermFormat:
             'end': "Heure de fin",
             'description': "Description",
         }
+
+    @staticmethod
+    def pcm_format_error() -> str:
+        return "# **Erreur de formatage de date et/ou heure.**"
 
     @staticmethod
     def pcm_thread(perm: Permanence, user: discord.User) -> dict:  # Permanence Modal - Created Thread
