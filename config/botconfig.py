@@ -14,3 +14,4 @@ class Config:
         self.edilbot_log_filename = parser['global']['EdilbotLogFilename']
         # Permanence configuration
         self.permanence_config = parser['permanence']
+        self.wordpress_config = parser['wordpress']

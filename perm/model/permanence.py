@@ -19,12 +19,13 @@ class Permanence:
     def validate(self):
         try:
             dateparser = PermDateParser()
-            self.start_date = dateparser.get_date(self.datestr, self.startstr)
+            self.start_date = dateparser.get_date(self.datestr, self.startstr).date_obj
         except InvalidDateError:
             return INVALID_DATE
         except InvalidTimeError:
             return INVALID_START_TIME
         try:
-            self.end_date = dateparser.get_date(self.datestr, self.endstr)
+            self.end_date = dateparser.get_date(self.datestr, self.endstr).date_obj
         except InvalidTimeError:
             return INVALID_END_TIME
+        return VALID_TIMES
