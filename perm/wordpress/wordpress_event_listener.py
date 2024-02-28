@@ -1,6 +1,5 @@
 from perm.event_listener import EventListener
 from perm.model.permanence import Permanence
-from perm.utils.permdateparser import PermDateParser
 from perm.wordpress.wordpress_service import WordpressService
 
 
