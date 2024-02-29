@@ -5,6 +5,9 @@ INVALID_START_TIME = 'invalid_start_time'
 INVALID_END_TIME = 'invalid_end_time'
 VALID_TIMES = 'valid_times'
 
+DATA_DISCORD = 'discord'
+DATA_WP = 'wordpress'
+
 
 class Permanence:
     def __init__(self, title="", datestr="", startstr="", endstr="", description=""):
@@ -15,6 +18,7 @@ class Permanence:
         self.description: str = description
         self.start_date = None
         self.end_date = None
+        self.data = dict()
 
     def validate(self):
         try:
