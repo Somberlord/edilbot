@@ -1,3 +1,5 @@
+import json
+
 from perm.utils.permdateparser import PermDateParser, InvalidTimeError, InvalidDateError
 
 INVALID_DATE = 'invalid_date'
@@ -33,3 +35,25 @@ class Permanence:
         except InvalidTimeError:
             return INVALID_END_TIME
         return VALID_TIMES
+
+
+class PermanenceJsonEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, list):
+            res = []
+            for item in obj:
+                res.append(self.default(item))
+            return res
+        elif isinstance(obj, Permanence):
+            res_dict = {
+                "title": obj.title,
+                "datestr": obj.datestr,
+                "startstr": obj.startstr,
+                "endstr": obj.endstr,
+                "description": obj.description,
+            }
+            if len(obj.data) > 0:
+                res_dict["data"] = obj.data
+            return res_dict
+        else:
+            return super().default(obj)
